@@ -8,23 +8,15 @@ avgdiff(it) = mean(abs(diffsum));
 
 %liczba neuronów w ukrytych warstwach może być różna
 
-for z=numhiddenlayers:2
 for y = 1:numoutputs
     for x = 1:numhidden
-        tmp = ( deltaoutput / hiddens(x).value );
+        tmp = ( deltaoutput ./ hiddens(1,x).value );
         outputs(y).bonds(x) = outputs(y).bonds(x) - tmp;
-        hiddens(x).sum = (deltaoutput / outputs(y).bonds(x)) .* sigmoid_prime(hiddens(x).value,1,0);
+        hiddens(1,x).sum = (deltaoutput / outputs(y).bonds(x)) .* sigmoid_prime(hiddens(1,x).value,1,0);
     end
 end
 
 % Recalculating initial weights
-
-for y = 1:numhidden
-    for x = 1:size(inputs,1)
-        hiddens(y).bonds(x) = hiddens(y).bonds(x) - (hiddens(y).sum / inputs(x,:));
-    end
-end
-end
 
 for y = 1:numhidden
     for x = 1:size(inputs,1)
