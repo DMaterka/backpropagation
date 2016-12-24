@@ -1,26 +1,23 @@
 it = 1;
-numit = 1000;
-numhidden = 3;
-numoutputs = 2;
+numit = 10000;
+numhidden = 12;
+numoutputs = 1;
 numhiddenlayers = 1;
-hiddenlayersdef = [2]; % number of neurons in each hidden layer 
-
 hiddens = struct();
 outputs = struct();
-inputs = [0.01,0.01,0.99,0.99; 
-          0.99,0.01,0.99,0.01];
-expected=[0.99,0.01,0.01,0.99];
+inputs = [0,0,1,1; 
+          1,0,1,0];
+expected=[1,0,0,1];
 
 out = zeros(numit,length(inputs));
 
 %%%% initialize weights %%%% 
-for z = 1:length(hiddenlayersdef)
-    for y = 1:hiddenlayersdef(z)
-    hiddens(z,y).bonds = rand(size(inputs,1),1);
+
+    for y = 1:numhidden
+    hiddens(1,y).bonds = rand(size(inputs,1),1);
     end
-end
 for y = 1:numoutputs
-    outputs(y).bonds = rand(1,hiddenlayersdef(end));
+    outputs(y).bonds = rand(1,numhidden);
 end
 
 for it = 1:numit
