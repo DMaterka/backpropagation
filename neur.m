@@ -33,6 +33,6 @@ p1 = plot(avgdiff,'r')
 hold off
 bonds_out = outputs.bonds;
 bonds_hidden = hiddens.bonds;
-save('neural_xor','outputs','hiddens','hiddensdef)
+save('neural_xor','outputs','hiddens','hiddensdef')
 p2 = plot(avgdiff)
 %clear;
