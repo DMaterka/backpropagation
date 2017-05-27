@@ -1,3 +1,4 @@
+%%%% script starts %%%%
 it = 1;
 numit = 10000;
 numoutputs = 1;
@@ -5,10 +6,11 @@ numhiddenlayers = 1;
 hiddensdef = [8];
 hiddens = struct();
 outputs = struct();
-inputs = [0,0,1,1; 
-          1,0,1,0];
+inputs = [0,1,0,1; 
+          1,1,0,0];
 expected=[1,0,0,1];
 
+%%%% allocate output variable %%%%
 out = zeros(numit,length(inputs));
 
 %%%% initialize weights %%%% 
