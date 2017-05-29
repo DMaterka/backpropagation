@@ -1,5 +1,5 @@
 %Backpropagation start
-out(it,:,:) = outputs(1).value(:,:);
+out(it,1) = outputs(1).value;
 diffsum = outputs(1).value - expected;
 deroutput = sigmoid_prime(outputs(1).value,1,0);
 
