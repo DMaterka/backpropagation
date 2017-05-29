@@ -1,6 +1,6 @@
 for z = length(hiddensdef)   
     for y = 1:hiddensdef(z)
-        hiddens(1,y).sum = 0;
+        hiddens(z,y).sum = 0;
         %%get the sum from inputs, as initial sum%%
         for x = 1:size(inputs,1)
             partialsum = hiddens(1,y).bonds(x) * inputs(x,:);
