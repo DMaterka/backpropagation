@@ -21,7 +21,7 @@ for z = length(hiddensdef)
     end
 end
 
-hiddens(1,1).bonds = [0.8;0.3];
+hiddens(1,1).bonds = [0.8;0.2];
 hiddens(1,2).bonds = [0.4;0.9];
 hiddens(1,3).bonds = [0.3;0.5];
 
@@ -36,15 +36,32 @@ outputs.bonds = [0.3,0.5,0.9];
 for it = 1:numit
 init_neur
 backpropagation
+    if(it==1)
+    assert(floor(out(end,1)*100)/100 == 0.77,'General error','test ok')
+    end
 end
 out(end,:)'
-%plot(1:it,out(:,:)')
-%hold on
-%p1 = plot(avgdiff,'r');
-%hold off
+
 bonds_out = outputs.bonds;
 bonds_hidden = hiddens.bonds;
-%p2 = plot(avgdiff);
-%clear;
 
-assert(floor(out(end,1)*100)/100 == 0.77,'General error','test ok')
+w1= 0.7921;
+assert(abs(hiddens(1,1).bonds(1)-w1) < 0.1,'assigning new weights seems to be spoiled');    
+w2= 0.3887;   
+assert(abs(hiddens(1,2).bonds(1)-w2) < 0.1,'assigning new weights seems to be spoiled');   
+w3= 0.2741;    
+assert(abs(hiddens(1,3).bonds(1)-w3) < 0.1,'assigning new weights seems to be spoiled');   
+w4= 0.1921;
+assert(abs(hiddens(1,1).bonds(2)-w4) < 0.1,'assigning new weights seems to be spoiled');   
+w5= 0.8887;     
+assert(abs(hiddens(1,2).bonds(2)-w5) < 0.1,'assigning new weights seems to be spoiled');   
+w6= 0.4741;    
+assert(abs(hiddens(1,3).bonds(2)-w6) < 0.1,'assigning new weights seems to be spoiled');   
+w7= 0.2020;    
+assert(abs(outputs(1,1).bonds(1)-w7) < 0.1,'assigning new weights seems to be spoiled');   
+w8= 0.3940; 
+assert(abs(outputs(1,1).bonds(2)-w8) < 0.1,'assigning new weights seems to be spoiled');   
+w9= 0.8060;
+assert(abs(outputs(1,1).bonds(3)-w9) < 0.1,'assigning new weights seems to be spoiled');   
+
+%clear;
