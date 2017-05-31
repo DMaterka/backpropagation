@@ -18,5 +18,3 @@ for y = 1:numoutputs
     end
         outputs(y).value = sigmf(outputs(y).sum,[1,0]);
 end
-
-
