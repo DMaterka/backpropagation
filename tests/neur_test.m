@@ -1,4 +1,5 @@
 addpath('..');
+addpath('../lib');
 %%%% script starts %%%%
 it = 1;
 numit = 1;
@@ -14,24 +15,15 @@ expected=[0];
 %%%% allocate output variable %%%%
 out = zeros(numit,length(outputs));
 
-%%%% initialize weights %%%% 
-for z = length(hiddensdef)
-    for y = 1:hiddensdef(z)
-        hiddens(z,y).bonds = rand(size(inputs,1),1);
-    end
-end
+bstruct = init_weights(inputs,hiddensdef,numoutputs);
 
-hiddens(1,1).bonds = [0.8;0.2];
-hiddens(1,2).bonds = [0.4;0.9];
-hiddens(1,3).bonds = [0.3;0.5];
+bstruct(2,1).bonds = [0.8;0.2];
+bstruct(2,2).bonds = [0.4;0.9];
+bstruct(2,3).bonds = [0.3;0.5];
+bstruct(3,1).bonds = [0.3,0.5,0.9];
 
-for y = 1:numoutputs
-    %%output bonds conformed with hiddensdef bonds number
-    outputs(y).bonds = rand(1,hiddensdef(end));
-end
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-outputs.bonds = [0.3,0.5,0.9];
+hiddens = bstruct(2,:);
+outputs = bstruct(3,:);
 
 for it = 1:numit
 init_neur
@@ -64,4 +56,4 @@ assert(abs(outputs(1,1).bonds(2)-w8) < 0.1,'assigning new weights seems to be sp
 w9= 0.8060;
 assert(abs(outputs(1,1).bonds(3)-w9) < 0.1,'assigning new weights seems to be spoiled');   
 
-%clear;
+clearvars -global;

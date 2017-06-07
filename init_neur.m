@@ -11,7 +11,7 @@ for z = length(hiddensdef)
     end
 end
 
-for y = 1:numoutputs
+for y = 1:length(expected)
     outputs(y).sum = 0;
     for x = 1:hiddensdef(end)
         outputs(y).sum = outputs(y).sum + outputs(y).bonds(x) * hiddens(end,x).value;

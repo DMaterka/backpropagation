@@ -1,30 +1,19 @@
 %%%% script starts %%%%
+addpath('lib');
 it = 1;
 numit = 100;
-numoutputs = 1;
-numhiddenlayers = 1;
 hiddensdef = [3];
-hiddens = struct();
-outputs = struct();
-inputs = [0.01;  
-          0.99];
-expected=[0.01];
-
+numhiddenlayers = length(hiddensdef);
+inputs = [0.01;  0.99];
+expected= [0.01];
+numoutputs = length(expected);
 %%%% allocate output variable %%%%
 out = zeros(numit,length(outputs));
 
-%%%% initialize weights %%%% 
-for z = length(hiddensdef)
-    for y = 1:hiddensdef(z)
-        hiddens(z,y).bonds = rand(size(inputs,1),1);
-    end
-end
+bstruct = init_weights(inputs,hiddensdef,numoutputs);
 
-for y = 1:numoutputs
-    %%output bonds conformed with hiddensdef bonds number
-    outputs(y).bonds = rand(1,hiddensdef(end));
-end
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+hiddens = bstruct(2,:);
+outputs = bstruct(3,:);
 
 for it = 1:numit
 init_neur
