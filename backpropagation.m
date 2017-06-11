@@ -1,27 +1,28 @@
 %Backpropagation start
-out(it,1) = outputs(1).value;
-diffsum = outputs(1).value - expected;
-deroutput = sigmoid_prime(outputs(1).value,1,0);
+out(it,1) = big_struct(end,1).value;
+diffsum = big_struct(end,1).value - expected;
+deroutput = sigmoid_prime(big_struct(end,1).value,1,0);
 
 deltaoutput = diffsum .* deroutput;
 avgdiff(it) = mean(abs(diffsum));
 doutputsum = 0;
-weightdiff =0;
-for y = 1:numoutputs
+weightdiff = 0;
+for y = 1:def(3)
     sumoutp = 0;
-    doutputsum = sigmoid_prime(outputs(y).sum,1,0) * (diffsum);
-    for x = 1:hiddensdef(1)
-        weightdiff = doutputsum * hiddens(1,x).value;
-        outputs(y).bonds(x) = outputs(y).bonds(x) - weightdiff ;
+    doutputsum = sigmoid_prime(big_struct(3,1).sum,1,0) * (diffsum);
+    for x = 1:def(2)
+        weightdiff = doutputsum * big_struct(2,x).value;
+        big_struct(3,1).bonds(x) = big_struct(3,1).bonds(x) - weightdiff ;
     end
 end
 
 
-for y = 1:hiddensdef(1)
+for y = 1:def(2)
     dhiddensum =0;
-    dhiddensum = doutputsum * outputs(1).bonds(y) * sigmoid_prime(hiddens(1,y).sum,1,0);
+    dhiddensum = doutputsum * big_struct(end,1).bonds(y) * sigmoid_prime(big_struct(2,y).sum,1,0);
     for x = 1:size(inputs,1)
-        weightdiff = dhiddensum * inputs(x,1);
-        hiddens(1,y).bonds(x) = hiddens(1,y).bonds(x) - dhiddensum ;
+        weightdiff = dhiddensum * big_struct(1,x).value;
+        big_struct(2,y).bonds(x) = big_struct(2,y).bonds(x) - dhiddensum ;
     end
 end
+
