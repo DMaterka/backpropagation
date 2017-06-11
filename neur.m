@@ -20,8 +20,8 @@ outputs = big_struct(3,:);
 
 out = zeros(numit,length(expected));
 for it = 1:numit
-init_neur1
-backpropagation1
+init_neur
+backpropagation
 end
 out(end,:)'
 plot(1:it,out(:,:)');
