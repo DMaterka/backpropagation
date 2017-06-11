@@ -24,8 +24,8 @@ big_struct(2,3).bonds = [0.3;0.5];
 big_struct(3,1).bonds = [0.3,0.5,0.9];
 
 for it = 1:numit
-init_neur1
-backpropagation1
+init_neur
+backpropagation
     if(it==1)
     assert(floor(out(end,1)*100)/100 == 0.77,'General error','test ok')
     end
