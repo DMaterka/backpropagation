@@ -2,9 +2,7 @@ addpath('..');
 addpath('../lib');
 %%%% script starts %%%%
 it = 1;
-numit = 1;
-numoutputs = length(expected);
-numhiddenlayers = 1;
+
 hiddensdef = [3];
 inputs = [1;1];
 expected=[0];
@@ -12,9 +10,8 @@ expected=[0];
 %%%% allocate output variable %%%%
 out = zeros(numit,length(expected));
 
-def = [length(inputs), hiddensdef,numoutputs];
+def = [length(inputs), hiddensdef, length(expected)];
 
-big_struct = init_weights(def);
 big_struct(1,1).value = inputs(1,1);
 big_struct(1,2).value = inputs(2,1);
 big_struct(2,1).bonds = [0.8;0.2];
@@ -22,14 +19,11 @@ big_struct(2,2).bonds = [0.4;0.9];
 big_struct(2,3).bonds = [0.3;0.5];
 big_struct(3,1).bonds = [0.3,0.5,0.9];
 
-for it = 1:numit
 big_struct = forwardpass(big_struct,def);
 out(it,1) = big_struct(end,1).value;
 diffsum = big_struct(end,1).value - expected;
 big_struct = backpropagation(big_struct,def,diffsum);
-end
 
-assert(it ==1, 'Too many iterations');
 assert(floor(out(end,1)*100)/100 == 0.77,strcat('General error', num2str(out(end,1))))
 out(end,1)
 w1= 0.7921;
