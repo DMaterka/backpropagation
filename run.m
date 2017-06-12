@@ -1,7 +1,7 @@
+function run(inputs)
 load('neural_xor.mat')
-hiddensdef = [2];
-numoutputs = length(outputs);
-inputs = [0.001;0.999];
-init_neur
-outputs(1).value
-%clear;
+big_struct(1,1).value = inputs(1,1);
+big_struct(1,2).value = inputs(2,1);
+big_struct = forwardpass(big_struct,def);
+big_struct(end,1).value
+end
