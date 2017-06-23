@@ -1,5 +1,4 @@
 function big_struct = init_weights(def)
-global big_struct;
 
 big_struct = struct();
 

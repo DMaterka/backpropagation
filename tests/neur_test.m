@@ -8,7 +8,7 @@ inputs = [1;1];
 expected=[0];
 
 %%%% allocate output variable %%%%
-out = zeros(numit,length(expected));
+out = zeros(it,length(expected));
 
 def = [length(inputs), hiddensdef, length(expected)];
 
@@ -22,9 +22,9 @@ big_struct(3,1).bonds = [0.3,0.5,0.9];
 big_struct = forwardpass(big_struct,def);
 out(it,1) = big_struct(end,1).value;
 diffsum = big_struct(end,1).value - expected;
-big_struct = backpropagation(big_struct,def,diffsum);
+big_struct = backpropagation(big_struct,def,expected);
 
-assert(floor(out(end,1)*100)/100 == 0.77,strcat('General error', num2str(out(end,1))))
+assert(floor(out(end,1)*100)/100 == 0.77,strcat('General error ', num2str(out(end,1))))
 out(end,1)
 w1= 0.7921;
 assert(abs(big_struct(2,1).bonds(1)-w1) < 0.1,'assigning new weights seems to be spoiled');    
@@ -46,3 +46,4 @@ w9= 0.8060;
 assert(abs(big_struct(3,1).bonds(3)-w9) < 0.1,'assigning new weights seems to be spoiled');   
 
 clearvars -global;
+clear;
