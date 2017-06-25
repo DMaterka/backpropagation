@@ -17,7 +17,7 @@ big_struct(1,2).value = inputs(2,1);
 big_struct(2,1).bonds = [0.8;0.2];
 big_struct(2,2).bonds = [0.4;0.9];
 big_struct(2,3).bonds = [0.3;0.5];
-big_struct(3,1).bonds = [0.3,0.5,0.9];
+big_struct(3,1).bonds = [0.3;0.5;0.9];
 
 big_struct = forwardpass(big_struct,def);
 out(it,1) = big_struct(end,1).value;
@@ -44,6 +44,8 @@ w8= 0.3940;
 assert(abs(big_struct(3,1).bonds(2)-w8) < 0.1,'assigning new weights seems to be spoiled');   
 w9= 0.8060;
 assert(abs(big_struct(3,1).bonds(3)-w9) < 0.1,'assigning new weights seems to be spoiled');   
+
+print_struct(big_struct,def);
 
 clearvars -global;
 clear;
